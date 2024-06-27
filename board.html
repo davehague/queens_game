@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queens Game Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            text-align: center;
+        }
+        .board {
+            display: inline-grid;
+            grid-template-columns: repeat(8, 50px);
+            grid-template-rows: repeat(8, 50px);
+            gap: 2px;
+            padding: 10px;
+            background-color: #888;
+            border-radius: 5px;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+        <div class="board" id="board"></div>
+        <button id="clearButton">Clear Board</button>
+    </div>
+
+
+    <script>
+        const boardData = {
+            "board":
+[[{"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#FFB3BA"}, {"value": "Q", "color": "#FFB3BA"}, {"value": "", "color": "#FFB3BA"}, {"value": "", "color": "#FFFFBA"}, {"value": "", "color": "#FFFFBA"}, {"value": "", "color": "#FFFFBA"}, {"value": "", "color": "#FFFFBA"}], [{"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#FFB3BA"}, {"value": "", "color": "#FFB3BA"}, {"value": "", "color": "#FFFFBA"}, {"value": "Q", "color": "#FFFFBA"}, {"value": "", "color": "#ffb1ff"}, {"value": "", "color": "#ffb1ff"}, {"value": "", "color": "#ffb1ff"}], [{"value": "", "color": "#D4F0F0"}, {"value": "Q", "color": "#D4F0F0"}, {"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#FFFFBA"}, {"value": "", "color": "#ffb1ff"}, {"value": "", "color": "#ffb1ff"}, {"value": "", "color": "#ffb1ff"}], [{"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#ffb1ff"}, {"value": "Q", "color": "#ffb1ff"}], [{"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#BAFFC9"}, {"value": "", "color": "#BAE1FF"}, {"value": "", "color": "#E0BBE4"}, {"value": "Q", "color": "#E0BBE4"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#ffb1ff"}], [{"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#D4F0F0"}, {"value": "", "color": "#BAFFC9"}, {"value": "Q", "color": "#BAE1FF"}, {"value": "", "color": "#BAE1FF"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#E0BBE4"}, {"value": "", "color": "#E0BBE4"}], [{"value": "", "color": "#BAFFC9"}, {"value": "", "color": "#BAFFC9"}, {"value": "", "color": "#BAFFC9"}, {"value": "", "color": "#FFDFBA"}, {"value": "", "color": "#FFDFBA"}, {"value": "", "color": "#E0BBE4"}, {"value": "Q", "color": "#FFDFBA"}, {"value": "", "color": "#E0BBE4"}], [{"value": "Q", "color": "#BAFFC9"}, {"value": "", "color": "#BAFFC9"}, {"value": "", "color": "#BAFFC9"}, {"value": "", "color": "#BAFFC9"}, {"value": "", "color": "#FFDFBA"}, {"value": "", "color": "#FFDFBA"}, {"value": "", "color": "#FFDFBA"}, {"value": "", "color": "#FFDFBA"}]]
+
+};
+        function createBoard() {
+            const board = document.getElementById('board');
+            boardData.board.forEach((row, rowIndex) => {
+                row.forEach((cell, colIndex) => {
+                    const cellElement = document.createElement('div');
+                    cellElement.className = 'cell';
+                    cellElement.style.backgroundColor = cell.color;
+                    cellElement.textContent = cell.value;
+                    cellElement.addEventListener('click', () => cellClick(rowIndex, colIndex));
+                    board.appendChild(cellElement);
+                });
+            });
+        }
+
+        function cellClick(row, col) {
+            const cellElement = document.querySelector(`.cell:nth-child(${row * 8 + col + 1})`);
+            if (cellElement.textContent === '') {
+                cellElement.textContent = 'X';
+            } else if (cellElement.textContent === 'X') {
+                cellElement.textContent = '♛';
+            } else {
+                cellElement.textContent = '';
+            }
+        }
+
+                function clearBoard() {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                cell.textContent = '';
+            });
+        }
+
+        createBoard();
+
+                document.getElementById('clearButton').addEventListener('click', clearBoard);
+
+    </script>
+</body>
+</html>
