@@ -1,5 +1,5 @@
 # Queens Game Clone
-A quick clone of the Queens Game, a game where you have to place 8 queens on a chess board with the following rules:
+A quick clone of the LinkedIn [Queens Game](https://www.linkedin.com/games/queens/), a game where you have to place 8 queens on a chess board with the following rules:
 
 1. Exactly one queen in each row
 2. Exactly one queen in each column
